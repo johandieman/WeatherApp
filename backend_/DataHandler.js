@@ -1,4 +1,4 @@
-const connectstring ="mongodb+srv://db_admin:OiZtN3u8WVFPNfne@weatherbabe.d5kn0.mongodb.net/weather?retryWrites=true&w=majority";
+const connectstring = require('./keys').mongo.connect;
 const monk = require("monk")(connectstring);
 const weatherlogins = monk.get("logins");
 

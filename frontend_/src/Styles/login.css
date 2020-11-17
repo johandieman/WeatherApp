@@ -4,7 +4,7 @@
     padding: 50px;
 }
 .loginpaper:hover{
-    
+    box-shadow: 0 10px 20px rgba(5, 3, 3, 0.32),0 4px 8px rgba(2, 1, 1, 0.26);
 }
 .center-vertical{
     margin: 0;
@@ -13,8 +13,11 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-.Background{
-    width: 100%;
-    height:100%;
+
+
+body{
+    background-color: rgb(32, 145, 145);
+    /*background-image: url();*/
     
 }
+
