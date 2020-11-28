@@ -5,11 +5,15 @@ import {
   Paper,
   Button,
   ThemeProvider,
-  Box,
+  Box,  
 } from "@material-ui/core";
 import "../Styles/login.css";
 import theme from "./theme";
 import Greeting from "./greeting";
+import {Link} from "react-router-dom";
+import requester from "axios";
+
+import routes from "../routes";
 
 class Login extends Component {
   
@@ -17,9 +21,7 @@ class Login extends Component {
     super(props);
     this.state ={
       user: '',
-      pass: '',
-      objuser:null,
-      objpass:null
+      pass: ''    
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,16 +31,26 @@ class Login extends Component {
     this.setState({
       user: event.target.user,
       pass: event.target.pass
-    });
-
-    this.state.user!=''?this.setState({ objuser:{shrink:true} }):this.setState({objuser:null});
-    this.state.pass!=''?this.setState({ objpass:{shrink:true} }):this.setState({objpass:null});
-    
+    });    
   }
   
   handleSubmit(event){
-    event.preventDefault();
-    //requests
+    event.preventDefault();    
+    requester.get(routes.testing.login)
+      .then((res) => {
+        console.log(res);
+        // if (res.data.status === "error") {
+        //   //this.props.history.push({ pathname: "/error", data: res });
+        // }
+        // else{
+        //   //console.log(res);
+        //   //this.props.history.push({ pathname: "/result", data:res});
+        // }
+      })
+      .catch((err) => {
+        console.log(err);
+        //this.props.history.push({ pathname: "/error", data: err });
+      });    
   }
 
   render() {
@@ -53,16 +65,16 @@ class Login extends Component {
           direction="row"
           className=""
         >
-          <Grid direction="column" className="center-vertical">
+          <Grid   className="center-vertical">
             <Greeting id="Greeting" />
 
             <Paper variant="elevation" elevation={4} className="loginpaper">
               <form onSubmit={this.handleSubmit}>
                 <Grid item>
-                  <TextField id="" InputLabelProps={this.state.objuser} label="Username" value={this.state.user} onChange={this.handleChange}/>
+                  <TextField label="Username"  onChange={this.handleChange}/>
                 </Grid>
                 <Grid item>
-                  <TextField id="" InputLabelProps={this.state.objpass} label="Password" value={this.state.pass } onChange={this.handleChange}/>
+                  <TextField  label="Password"  onChange={this.handleChange}/>
                 </Grid>
                 <Box
                   mt={2}
@@ -70,10 +82,10 @@ class Login extends Component {
                   display="flex"
                   justifyContent="center"
                 >
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" type="submit">
                     Submit
-                  </Button>
-                  <Button color="secondary">Register</Button>
+                  </Button>                  
+                  <Button color="secondary"><Link to="/register" style={{textDecoration:"none"}}>Register</Link></Button>
                 </Box>
               </form>
             </Paper>

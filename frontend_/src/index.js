@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Main from "./Components/Main";
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login}/>
           <Route path="/register" component={Register}/>
+          <Route path="/main" component={Main}/>
         </Switch>
       </div>
     </Router>
@@ -20,4 +23,4 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
-reportWebVitals(console.log);
+//reportWebVitals(console.log);
